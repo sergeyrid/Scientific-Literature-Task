@@ -29,10 +29,11 @@ def solve(graph: DiGraph, set1: list, set2: list) -> list:
     find_dists(graph, set1, dists1)
     dists2 = [2 * n + 1 for _ in range(n + 1)]
     find_dists(graph, set2, dists2)
-    dists = list((zip(range(n + 1), map(add, dists1, dists2))))
-    dists = list(filter(lambda x: x[1] <= 2 * n, dists[1:]))
+    dists = map(add, dists1, dists2)
+    dists = list(zip(dists, range(n + 1)))
+    dists = list(filter(lambda x: x[0] <= 2 * n, dists[1:]))
     dists.sort()
-    return [v for v, _ in dists]
+    return [v for _, v in dists]
 
 
 def print_answer(file_name: str, answer: list) -> None:
