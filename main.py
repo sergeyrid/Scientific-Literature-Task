@@ -1,6 +1,6 @@
 from networkx import DiGraph, edge_bfs
-from os.path import isfile
 from operator import add
+from os.path import isfile
 
 
 def read_input(file_name: str, graph: DiGraph, set1: list, set2: list) -> None:
@@ -19,15 +19,15 @@ def read_input(file_name: str, graph: DiGraph, set1: list, set2: list) -> None:
 def find_dists(graph: DiGraph, node_set: list, dists: list) -> None:
     for v in node_set:
         dists[v] = 0
-    for u, v, _ in edge_bfs(graph, node_set, 'reverse'):
+    for u, v, _ in edge_bfs(graph, node_set, orientation='reverse'):
         dists[u] = min(dists[u], dists[v] + 1)
 
 
 def solve(graph: DiGraph, set1: list, set2: list) -> list:
     n = graph.number_of_nodes()
-    dists1 = [2 * n + 1 for v in range(n + 1)]
+    dists1 = [2 * n + 1 for _ in range(n + 1)]
     find_dists(graph, set1, dists1)
-    dists2 = [2 * n + 1 for v in range(n + 1)]
+    dists2 = [2 * n + 1 for _ in range(n + 1)]
     find_dists(graph, set2, dists2)
     dists = list((zip(range(n + 1), map(add, dists1, dists2))))
     dists = list(filter(lambda x: x[1] <= 2 * n, dists[1:]))

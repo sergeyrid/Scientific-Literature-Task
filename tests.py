@@ -13,30 +13,35 @@ def check(exp_name: str, out_name: str) -> None:
     expected = []
     with open(exp_name, 'r') as exp_file:
         for line in exp_file.readlines():
-            if line.isnumeric():
+            try:
                 expected.append(int(line))
+            except ValueError:
+                raise ValueError('Incorrect expected file format')
     output = []
     with open(out_name, 'r') as out_file:
         for line in out_file.readlines():
-            if line.isnumeric():
+            try:
                 output.append(int(line))
-    assert expected == output
+            except ValueError:
+                raise ValueError('Incorrect output file format')
+    assert output == expected
 
 
-class TestDummy:
-    dummy_path = all_path + 'dummy_tests/'
+class BaseTestClass:
+    @staticmethod
+    def run_main_test(test_path: str) -> None:
+        main(test_path + in_default_name, test_path + out_default_name)
+        check(test_path + exp_default_name, test_path + out_default_name)
+
+
+class TestDummy(BaseTestClass):
+    class_path = all_path + 'dummy_tests/'
 
     def test1(self) -> None:
-        test1_path = self.dummy_path + 'test1/'
-        main(test1_path + in_default_name, test1_path + out_default_name)
-        check(test1_path + exp_default_name, test1_path + out_default_name)
+        self.run_main_test(self.class_path + 'test1/')
 
     def test2(self) -> None:
-        test2_path = self.dummy_path + 'test2/'
-        main(test2_path + in_default_name, test2_path + out_default_name)
-        check(test2_path + exp_default_name, test2_path + out_default_name)
+        self.run_main_test(self.class_path + 'test2/')
 
     def test3(self) -> None:
-        test3_path = self.dummy_path + 'test3/'
-        main(test3_path + in_default_name, test3_path + out_default_name)
-        check(test3_path + exp_default_name, test3_path + out_default_name)
+        self.run_main_test(self.class_path + 'test3/')
