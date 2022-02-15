@@ -30,3 +30,13 @@ class TestDummy:
         test1_path = self.dummy_path + 'test1/'
         main(test1_path + in_default_name, test1_path + out_default_name)
         check(test1_path + exp_default_name, test1_path + out_default_name)
+
+    def test2(self) -> None:
+        test2_path = self.dummy_path + 'test2/'
+        main(test2_path + in_default_name, test2_path + out_default_name)
+        check(test2_path + exp_default_name, test2_path + out_default_name)
+
+    def test3(self) -> None:
+        test3_path = self.dummy_path + 'test3/'
+        main(test3_path + in_default_name, test3_path + out_default_name)
+        check(test3_path + exp_default_name, test3_path + out_default_name)
