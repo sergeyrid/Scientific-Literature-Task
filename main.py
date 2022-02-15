@@ -9,6 +9,8 @@ def read_input(file_name: str, graph: DiGraph, set1: list, set2: list) -> None:
         graph.add_nodes_from(range(1, n + 1))
         for _ in range(m):
             u, v = map(int, file.readline().split())
+            if u > n or u < 1 or v > n or v < 1:
+                raise ValueError()
             graph.add_edge(u, v)
         file.readline()  # number of nodes in set1, useless
         set1 += list(map(int, file.readline().split()))

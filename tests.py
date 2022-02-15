@@ -65,8 +65,8 @@ class TestIncorrectInput(BaseTestClass):
     def test_letters_in_file(self) -> None:
         self.check_exception(self.class_path + 'test_letters_in_file/', ValueError)
 
-    def test_negative_values(self) -> None:
-        self.check_exception(self.class_path + 'test_negative_values/', ValueError)
+    def test_non_positive_values(self) -> None:
+        self.check_exception(self.class_path + 'test_non_positive_values/', ValueError)
 
     def test_no_file(self) -> None:
         self.check_exception(self.class_path + 'test_no_file/', FileNotFoundError)
